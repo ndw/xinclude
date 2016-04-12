@@ -22,13 +22,13 @@ opendir(DIR, "xinclude");
 while (readdir(DIR)) {
     next if /^\.\.?$/;
     next if ! -d "xinclude/$_";
-    push (@branches, $_) unless $_ eq 'master';
+    push (@branches, $_)
 }
 closedir(DIR);
 
 print "<dl>\n";
-foreach my $branch ("master", sort { $a cmp $b } @branches) {
-    my $fn = "xinclude/$branch/head/xproc20/index.html";
+foreach my $branch (sort { $a cmp $b } @branches) {
+    my $fn = "xinclude/$branch/head/index.html";
     my $date = pubdate($fn);
     print "<dt>The <em>$branch</em> branch, $date:</dt>\n";
     print "<dd>\n";
@@ -74,14 +74,15 @@ sub title {
     read (F, $_, 4096);
     close (F);
     s/^.*?<h1>(.*?)<\/h1>.*$/$1/s;
+    s/<a\s+.*?>//sg;
     return $_;
 }
 
 sub showspec {
     my $branch = shift;
     print "<ul>\n";
-    foreach my $name ("xproc20", "xproc20-steps") {
-        my $href = "xinclude/$branch/head/$name/";
+    foreach my $name ("head") {
+        my $href = "xinclude/$branch/$name/";
         my $fn = "$href/index.html";
         my $title = title($fn);
         print "<li><a href=\"$href\">$title</a></li>\n";
