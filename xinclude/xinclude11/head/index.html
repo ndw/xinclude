@@ -31,7 +31,7 @@ div.exampleHeader { font-weight: bold;
                     margin: 4px}
 </style><link rel="stylesheet" type="text/css" href="http://www.w3.org/StyleSheets/TR/W3C-CR.css"/></head><body><div class="head"><p><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" alt="W3C" height="48" width="72"/></a></p>
 <h1><a name="title" id="title"/>XML Inclusions (XInclude) Version 1.1</h1>
-<h2><a name="w3c-doctype" id="w3c-doctype"/>W3C Candidate Recommendation 30 June 2015</h2><dl><dt>This version:</dt><dd><a href="http://www.w3.org/TR/2015/CR-xinclude-11-20150630/">http://www.w3.org/TR/2015/CR-xinclude-11-20150630/</a></dd><dt>Latest version:</dt><dd><a href="http://www.w3.org/TR/xinclude-11/">http://www.w3.org/TR/xinclude-11/</a>
+<h2><a name="w3c-doctype" id="w3c-doctype"/>W3C Working Draft 12 April 2016</h2><dl><dt>This version:</dt><dd><a href="http://www.w3.org/TR/2016/WD-xinclude-11-20160412/">http://www.w3.org/TR/2016/WD-xinclude-11-20160412/</a></dd><dt>Latest version:</dt><dd><a href="http://www.w3.org/TR/xinclude-11/">http://www.w3.org/TR/xinclude-11/</a>
 </dd><dt>Previous version:</dt><dd><a href="http://www.w3.org/TR/2014/WD-xinclude-11-20141216/">http://www.w3.org/TR/2014/WD-xinclude-11-20141216/</a> </dd><dt>Editors:</dt><dd>Jonathan Marsh, Microsoft <a href="mailto:jmarsh@microsoft.com">&lt;jmarsh@microsoft.com&gt;</a></dd><dd>David Orchard, BEA Systems <a href="mailto:dorchard@bea.com">&lt;dorchard@bea.com&gt;</a></dd><dd>Daniel Veillard <a href="mailto:daniel@veillard.com">&lt;daniel@veillard.com&gt;</a> - Second Edition</dd><dd>Norman Walsh, MarkLogic
 Corporation <a href="mailto:norman.walsh@marklogic.com">&lt;norman.walsh@marklogic.com&gt;</a> - Version 1.1</dd></dl><p>Please refer to the <a href="http://www.w3.org/XML/2014/12/xinclude-errata/"><strong>errata</strong></a> for this document, which may
       include some normative corrections.</p><p>See also <a href="http://www.w3.org/2003/03/Translations/byTechnology?technology=xinclude10"><strong>translations</strong></a>.</p><p>This document is also available in these non-normative formats: <a href="xinclude-11.xml">XML</a>, <a href="diff10.html">with color-coded revision indicators from XInclude 1.0</a>, and <a href="diffcr.html">with color-coded revision indicators from the previous XInclude 1.1 draft</a>.</p><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2015 <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.ercim.eu/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p></div><hr/><div>
@@ -737,14 +737,17 @@ well as other text-based formats.</p><p>Resources that are unavailable for any r
 the resource doesn't exist, connection difficulties or security
 restrictions prevent it from being fetched, the URI scheme isn't
 a fetchable one, or the resource is in an unsupported encoding) result in a
-<a title="resource error" href="#dt-resource-error">resource error</a>.</p><p>The encoding of such a resource is determined by:</p><ul><li><p>external encoding information, if available, otherwise</p></li><li><p>if the media type of the resource indicates,
-according to XML Media Types <a href="#RFC3023">[IETF RFC 3023]</a>, that the
-resource is XML, for example <code>text/xml</code> or
-<code>application/xml</code> or matches
-<code>text/*+xml</code> or <code>application/*+xml</code>, then the
-encoding is determined as specified in <a href="#XML">[XML 1.0]</a> or
-<a href="#XML11">[XML 1.1]</a> section 4.3.3, as appropriate, otherwise</p></li><li><p>the value of the <code>encoding</code> attribute if one
-exists, otherwise</p></li><li><p>UTF-8.</p></li></ul><p>Byte sequences outside the range allowed by the encoding are a
+<a title="resource error" href="#dt-resource-error">resource error</a>.</p><p>The encoding of such a resource is determined as follows
+(terminology as defined in sections 2.2 and 2.3 of
+<a href="#RFC7303">[IETF RFC 7303]</a>):</p><ul><li><p>If external (out-of-band) information supplies encoding
+information, it is used.</p></li><li><p>Otherwise, by cases, depending on whether,
+and if so what, MIME information is available:</p><ul><li><p>For XML MIME entities:</p><ul><li><p>follow the guidelines given in section 3.2 of <a href="#RFC7303">[IETF RFC 7303]</a> or its
+successors;</p></li></ul></li><li><p>For MIME entities which are not XML MIME entities:</p><ul><li><p>As determined by a BOM (see Section 3.3 of <a href="#RFC7303">[IETF RFC 7303]</a>) if it is
+present;</p></li><li><p>In the absence of a BOM (Section 3.3), as determined by the charset
+parameter if it is present.</p></li><li><p>In the absence of a charset parameter, the value of the
+<code>encoding</code> attribute, if it exists.</p></li><li><p>Otherwise, UTF-8</p></li></ul></li><li><p>For non-MIME entities:</p><ul><li><p>If external (out-of-band) information identifies them as XML, then
+according to section 4.3.3 of <a href="#XML">[XML 1.0]</a>;</p></li><li><p>If it is not identified as XML, the value of the
+<code>encoding</code> attribute, if it exists.</p></li><li><p>Otherwise, UTF-8.</p></li></ul></li></ul></li></ul><p>Byte sequences outside the range allowed by the encoding are a
 <a title="fatal error" href="#dt-error">fatal error</a>.  Characters that are not
 permitted in XML documents also are a
 <a title="fatal error" href="#dt-error">fatal error</a>.</p><p>Each character obtained from the transformation of the resource is
@@ -1086,10 +1089,7 @@ Uniform Resource Identifiers</cite></a>. Internet Engineering
 Task Force, 1995.  (See http://www.ietf.org/rfc/rfc2396.txt.)</dd><dt class="label"><a name="RFC2732" id="RFC2732"/>IETF RFC 2732</dt><dd>
 <a href="http://www.ietf.org/rfc/rfc2732.txt"><cite>RFC 2732:
 Format for Literal IPv6 Addresses in URL's</cite></a>.
-Internet Engineering Task Force, 1999.  (See http://www.ietf.org/rfc/rfc2732.txt.)</dd><dt class="label"><a name="RFC3023" id="RFC3023"/>IETF RFC 3023</dt><dd>
-<a href="http://www.ietf.org/rfc/rfc3023.txt"><cite>RFC 3023:
-XML Media Types</cite></a>.
-Internet Engineering Task Force, 2001.  (See http://www.ietf.org/rfc/rfc3023.txt.)</dd><dt class="label"><a name="RFC3987" id="RFC3987"/>IETF RFC 3987</dt><dd>
+Internet Engineering Task Force, 1999.  (See http://www.ietf.org/rfc/rfc2732.txt.)</dd><dt class="label"><a name="RFC3987" id="RFC3987"/>IETF RFC 3987</dt><dd>
 <a href="http://www.ietf.org/rfc/rfc3987.txt"><cite>RFC 3987:
 Internationalized Resource Identifiers (IRIs)</cite></a>.
 Internet Engineering Task Force, 2005.  (See http://www.ietf.org/rfc/rfc3987.txt.)</dd><dt class="label"><a name="RFC4288" id="RFC4288"/>IETF RFC 4288</dt><dd>
@@ -1098,7 +1098,10 @@ Media Type Specifications and Registration Procedures</cite></a>.
 Internet Engineering Task Force, 2005.  (See http://www.ietf.org/rfc/rfc4288.txt.)</dd><dt class="label"><a name="RFC5147" id="RFC5147"/>IETF RFC 5147</dt><dd>
 <a href="http://www.ietf.org/rfc/rfc5147.txt"><cite>RFC 5147:
 URI Fragment Identifiers for the text/plain Media Type</cite></a>.
-Internet Engineering Task Force, 2008.  (See http://www.ietf.org/rfc/rfc5147.txt.)</dd><dt class="label"><a name="Unicode" id="Unicode"/>Unicode</dt><dd>The Unicode Consortium.
+Internet Engineering Task Force, 2008.  (See http://www.ietf.org/rfc/rfc5147.txt.)</dd><dt class="label"><a name="RFC7303" id="RFC7303"/>IETF RFC 7303</dt><dd>
+<a href="http://www.ietf.org/rfc/rfc7303.txt"><cite>RFC 7303:
+XML Media Types</cite></a>.
+Internet Engineering Task Force, 2014.  (See http://www.ietf.org/rfc/rfc7303.txt.)</dd><dt class="label"><a name="Unicode" id="Unicode"/>Unicode</dt><dd>The Unicode Consortium.
 <a href="http://www.unicode.org/unicode/standard/versions/"><cite>The
 Unicode Standard, Version 4.0.</cite></a> Reading, Mass.: Addison-Wesley,
 2003, as updated from time to time by the publication of new versions. (See
