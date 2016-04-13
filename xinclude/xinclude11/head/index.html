@@ -128,6 +128,7 @@ references Property Fixup</a></span><br/>
 <span>    C.6 <a href="#text-example-2">Textual Inclusion Examples with RFC5147 Fragment Identifiers</a></span><br/>
 <span>    C.7 <a href="#att-copy-example">Attribute Copying Examples</a></span><br/>
 <span>    C.8 <a href="#fallback-example">Fallback Example</a></span><br/>
+<span>    C.9 <a href="#text-encoding-example">Textual Inclusion Encoding Example</a></span><br/>
 </p></div><hr/><div class="body"><div class="div1">
 <h2><a name="intro" id="intro"/>1 Introduction</h2><p>Many programming languages provide an inclusion mechanism to
 facilitate modularity.  Markup languages also often have need of
@@ -1434,4 +1435,17 @@ and <em>language</em> properties)
 as that of the following document:</p><div class="exampleInner"><pre>&lt;?xml version='1.0'?&gt;
 &lt;div&gt;
   &lt;a href="mailto:bob@example.org"&gt;Report error&lt;/a&gt;
-&lt;/div&gt;</pre></div></div></div></div></body></html>
+&lt;/div&gt;</pre></div></div><div class="div2">
+<h3><a name="text-encoding-example" id="text-encoding-example"/>C.9 Textual Inclusion Encoding Example</h3><p>The following XML document specifies the encoding of the included
+text document. See <a href="#text-included-items"><b>4.4 Included Items when processing text</b></a>.</p><div class="exampleInner"><pre>&lt;?xml version='1.0'?&gt;
+&lt;document xmlns:xi="http://www.w3.org/2001/XInclude"&gt;
+  &lt;p&gt;This document is about
+  &lt;xi:include href="city.txt" parse="text/plain" encoding="ISO-8859-1"/&gt;.&lt;/p&gt;
+&lt;/document&gt;</pre></div><p>where city.txt contains:</p><div class="exampleInner"><pre>München</pre></div><p>(Encoded in ISO-8859-1, of course.)</p><p>The infoset resulting from resolving inclusions on this document
+is the same (except for the <em>include history</em>
+and <em>language</em> properties)
+as that of the following document:</p><div class="exampleInner"><pre>&lt;?xml version='1.0'?&gt;
+&lt;document xmlns:xi="http://www.w3.org/2001/XInclude"&gt;
+  &lt;p&gt;This document is about
+  München.&lt;/p&gt;
+&lt;/document&gt;</pre></div></div></div></div></body></html>
