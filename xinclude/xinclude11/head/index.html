@@ -745,9 +745,9 @@ and if so what, MIME information is available:</p><ul><li><p>For XML MIME entiti
 successors;</p></li></ul></li><li><p>For MIME entities which are not XML MIME entities:</p><ul><li><p>As determined by a BOM (see Section 3.3 of <a href="#RFC7303">[IETF RFC 7303]</a>) if it is
 present;</p></li><li><p>In the absence of a BOM (Section 3.3), as determined by the charset
 parameter if it is present.</p></li><li><p>In the absence of a charset parameter, the value of the
-<code>encoding</code> attribute, if it exists.</p></li><li><p>Otherwise, UTF-8</p></li></ul></li><li><p>For non-MIME entities:</p><ul><li><p>If external (out-of-band) information identifies them as XML, then
+<code>encoding</code> attribute on the <code>xi:include</code> element, if it exists.</p></li><li><p>Otherwise, UTF-8</p></li></ul></li><li><p>For non-MIME entities:</p><ul><li><p>If external (out-of-band) information identifies them as XML, then
 according to section 4.3.3 of <a href="#XML">[XML 1.0]</a>;</p></li><li><p>If it is not identified as XML, the value of the
-<code>encoding</code> attribute, if it exists.</p></li><li><p>Otherwise, UTF-8.</p></li></ul></li></ul></li></ul><p>Byte sequences outside the range allowed by the encoding are a
+<code>encoding</code> attribute on the <code>xi:include</code> element, if it exists.</p></li><li><p>Otherwise, UTF-8.</p></li></ul></li></ul></li></ul><p>Byte sequences outside the range allowed by the encoding are a
 <a title="fatal error" href="#dt-error">fatal error</a>.  Characters that are not
 permitted in XML documents also are a
 <a title="fatal error" href="#dt-error">fatal error</a>.</p><p>Each character obtained from the transformation of the resource is
