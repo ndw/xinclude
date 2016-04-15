@@ -609,7 +609,10 @@ infoset properties.</p>
 <head>The xpointer and fragid attributes</head>
 
 <p>The <att>xpointer</att> and <att>fragid</att> attributes identify a portion
-of a resource to include.</p>
+of a resource to include. It is a
+<termref def="dt-recoverable-error">recoverable error</termref> if an implementation
+does not support fragment identifiers on the resource type being included.
+</p>
 
 <p>If both <att>xpointer</att> and <att>fragid</att> are specified, they
 <termref def="dt-must">should</termref> be the same. It is a
