@@ -164,6 +164,7 @@
       <output>../../result/nist-include-02.xml</output>
     </testcase>
 
+    <!-- This test is not correct for XInclude 1.1
     <testcase id="Nist-include-03" href="nist-include-03.xml" type="error">
       <contributor>Sandra I. Martinez</contributor>
       <section resource="http://www.w3.org/TR/xinclude/#syntax">3.1</section>
@@ -171,6 +172,7 @@
       <description>Test that values other than xml or text, in the parse attribute of the XInclude
         element, result in fatal errors. </description>
     </testcase>
+    -->
 
     <testcase id="Nist-include-04" href="nist-include-04.xml" type="success">
       <contributor>Sandra I. Martinez</contributor>
