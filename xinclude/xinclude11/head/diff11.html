@@ -451,7 +451,10 @@ infoset properties.</p><p>The following (non-normative) DTD fragment illustrates
     accept-language CDATA       #IMPLIED
 &gt;</pre></div><div class="div3">
 <h4><a name="xpointer-and-fragid" id="xpointer-and-fragid"/>3.1.1 The xpointer and fragid attributes</h4><p>The <code>xpointer</code> and <code>fragid</code> attributes identify a portion
-of a resource to include.</p><p>If both <code>xpointer</code> and <code>fragid</code> are specified, they
+of a resource to include. It is a
+<a title="recoverable error" href="#dt-recoverable-error">recoverable error</a> if an implementation
+does not support fragment identifiers on the resource type being included.
+</p><p>If both <code>xpointer</code> and <code>fragid</code> are specified, they
 <a title="Must, May, etc." href="#dt-must">should</a> be the same. It is a
 <a title="recoverable error" href="#dt-recoverable-error">recoverable error</a> if they
 are not the same; to recover, if the <code>parse</code> attribute
