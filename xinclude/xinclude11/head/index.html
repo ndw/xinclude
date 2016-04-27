@@ -427,10 +427,7 @@ infoset properties.</p><p>The following (non-normative) DTD fragment illustrates
     accept-language CDATA       #IMPLIED
 &gt;</pre></div><div class="div3">
 <h4><a name="xpointer-and-fragid" id="xpointer-and-fragid"/>3.1.1 The xpointer and fragid attributes</h4><p>The <code>xpointer</code> and <code>fragid</code> attributes identify a portion
-of a resource to include. It is a
-<a title="recoverable error" href="#dt-recoverable-error">recoverable error</a> if an implementation
-does not support fragment identifiers on the resource type being included.
-</p><p>If both <code>xpointer</code> and <code>fragid</code> are specified, they
+of a resource to include.</p><p>If both <code>xpointer</code> and <code>fragid</code> are specified, they
 <a title="Must, May, etc." href="#dt-must">should</a> be the same. It is a
 <a title="recoverable error" href="#dt-recoverable-error">recoverable error</a> if they
 are not the same; to recover, if the <code>parse</code> attribute
@@ -452,7 +449,12 @@ if neither the <code>xpointer</code> nor <code>fragid</code> attributes are pres
 and the <code>href</code> attribute is not present.</p><p>Neither the <code>xpointer</code> nor <code>fragid</code> attributes
 contain a URI reference, and %-escaping is not done in XPointers, so '%' is
 an ordinary character in the value of the <code>xpointer</code> and
-<code>fragid</code> attributes.</p></div></div><div class="div2">
+<code>fragid</code> attributes.</p><p>It is a <a title="recoverable error" href="#dt-recoverable-error">recoverable
+error</a> if an implementation does not support the type of
+fragment identifier specified for use on a non-XML-typed resource, or
+does not support a form of XPointer fragment identifier other than
+those required by the definition of
+<a title="acquired infoset" href="#dt-acquired-infoset">acquired infoset</a>.</p></div></div><div class="div2">
 <h3><a name="fallback_element" id="fallback_element"/>3.2 xi:fallback Element</h3><p>The <code>xi:fallback</code> element appears as a child
 of an <code>xi:include</code> element.  It provides a mechanism
 for recovering from missing resources.  When a
