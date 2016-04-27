@@ -609,10 +609,7 @@ infoset properties.</p>
 <head>The xpointer and fragid attributes</head>
 
 <p>The <att>xpointer</att> and <att>fragid</att> attributes identify a portion
-of a resource to include. It is a
-<termref def="dt-recoverable-error">recoverable error</termref> if an implementation
-does not support fragment identifiers on the resource type being included.
-</p>
+of a resource to include.</p>
 
 <p>If both <att>xpointer</att> and <att>fragid</att> are specified, they
 <termref def="dt-must">should</termref> be the same. It is a
@@ -654,6 +651,13 @@ and the <att>href</att> attribute is not present.</p>
 contain a URI reference, and %-escaping is not done in XPointers, so '%' is
 an ordinary character in the value of the <att>xpointer</att> and
 <att>fragid</att> attributes.</p>
+
+<p>It is a <termref def="dt-recoverable-error">recoverable
+error</termref> if an implementation does not support the type of
+fragment identifier specified for use on a non-XML-typed resource, or
+does not support a form of XPointer fragment identifier other than
+those required by the definition of
+<termref def="dt-acquired-infoset">acquired infoset</termref>.</p>
 </div3>
 </div2>
 
